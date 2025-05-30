@@ -1,0 +1,22 @@
+services:
+  telegramm-antispam-bot:
+    build:
+      context: ./bot
+      target: dev
+    container_name: telegramm_antispam_bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - .:/bot
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.2
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data:/data

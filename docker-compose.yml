@@ -1,0 +1,8 @@
+services:
+  telegramm-antispam-bot:
+    build:
+      context: ./bot
+    container_name: telegramm_antispam_bot
+    restart: unless-stopped
+    env_file:
+      - .env
