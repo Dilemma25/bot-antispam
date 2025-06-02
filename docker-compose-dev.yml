@@ -1,5 +1,5 @@
 services:
-  telegramm-antispam-bot:
+  antispam-telegramm-bot:
     build:
       context: ./bot
       target: dev
@@ -10,11 +10,11 @@ services:
     volumes:
       - .:/bot
     depends_on:
-      - redis
+      - antispam-redis
 
-  redis:
+  antispam-redis:
     image: redis:7.2
-    container_name: redis
+    container_name: antispam_redis
     restart: unless-stopped
     ports:
       - "6379:6379"

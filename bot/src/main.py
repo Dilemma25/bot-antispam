@@ -7,9 +7,10 @@ from config import redis_client
 
 
 async def main() -> None:
-    await redis_client.set("my-key", "value")
-    value = await redis_client.get("my-key")
-    print(value)
+    # await redis_client.rpush("my-item", "value1")
+    # await redis_client.rpush("my-item", "value2")
+    # value = await redis_client.lrange("my-item", 0, -1)
+    # print(value)
     await dp.start_polling(bot)
 
     

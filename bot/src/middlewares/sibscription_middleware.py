@@ -1,15 +1,17 @@
+from typing import Any
 from aiogram.dispatcher.middlewares.base import BaseMiddleware
 from aiogram import Bot
 from aiogram import types
 from aiogram.enums import ChatMemberStatus
 
+
 class SibscriptionMiddleware(BaseMiddleware):
-    def __init__(self, bot: Bot, channel_id: str | int):
+    def __init__(self, bot: Bot, channel_id: str | int) -> None:
         super().__init__()
         self.bot = bot
         self.channel_id = channel_id
 
-    async def __call__(self, handler, event: types.Message, data: dict):
+    async def __call__(self, handler, event: types.Message, data: dict) -> Any | None:
         message: types.Message = event
 
         if message.sender_chat is not None:

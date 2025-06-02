@@ -6,7 +6,7 @@ authors = ["Dilemma25 <valtert90@mail.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.12"
+python = ">=3.12,<4.0"
 aiogram = "^3.20.0"  
 python-dotenv = "^1.1.0"
 redis = "^6.2.0"
