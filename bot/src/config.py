@@ -27,20 +27,17 @@ bot = Bot(
 
 dp.message.middleware(SibscriptionMiddleware(
                                              bot=bot, 
-                                             channel_id=settings.CHANNEL_ID
                                             ))
 
 censor_ru = Censor.get(lang='ru')
 dp.message.middleware(ProfanityFilterMIddleware(
                                                 bot=bot, 
-                                                channel_id=settings.CHANNEL_ID, 
                                                 censor=censor_ru
                                                 ))
 
 dp.message.middleware(AntiFloodMiddleware(
                                           redis=redis_client, 
                                           bot=bot, 
-                                          channel_id=settings.CHANNEL_ID, 
                                           max_messages=MAX_MESSAGES, 
                                           interval=INTERVAL
                                           ))

@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN = getenv('BOT_TOKEN')
-CHANNEL_ID = getenv('CHANNEL_ID')
 
 
 REDIS_HOST = getenv('REDIS_HOST')
