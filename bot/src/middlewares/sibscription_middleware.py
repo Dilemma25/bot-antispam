@@ -15,12 +15,12 @@ class SibscriptionMiddleware(BaseMiddleware):
         message: types.Message = event
 
         if message.sender_chat is not None:
-            return await handler(message, data)
+            return await handler(event, data)
 
         user_id = message.from_user.id
 
         if user_id is None:
-            return await handler(message, data)
+            return await handler(event, data)
 
         member = await self.bot.get_chat_member(self.channel_id, user_id=user_id)
         if member.status in (ChatMemberStatus.LEFT, ChatMemberStatus.KICKED):

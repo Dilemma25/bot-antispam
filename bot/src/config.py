@@ -8,16 +8,28 @@ import redis.asyncio as redis
 import settings
 from censure.base import Censor
 from middlewares.profanity_filter_middleware import ProfanityFilterMIddleware 
+from middlewares.anti_flood_middleware import AntiFloodMiddleware
+from constats import MAX_MESSAGES
+from constats import INTERVAL
 
-redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB)
+redis_client = redis.Redis(
+                           host=settings.REDIS_HOST, 
+                           port=settings.REDIS_PORT, 
+                           db=settings.REDIS_DB
+                           )
 
 dp = Dispatcher()
-bot = Bot(token=settings.TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+bot = Bot(
+          token=settings.TOKEN, 
+          default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+          )
 
 
 dp.message.middleware(SibscriptionMiddleware(bot=bot, channel_id=settings.CHANNEL_ID))
 
 censor_ru = Censor.get(lang='ru')
 dp.message.middleware(ProfanityFilterMIddleware(bot=bot, channel_id=settings.CHANNEL_ID, censor=censor_ru))
+
+dp.message.middleware(AntiFloodMiddleware(redis=redis_client, max_messages=MAX_MESSAGES, interval=INTERVAL))
 
 dp.include_router(debug_router)
