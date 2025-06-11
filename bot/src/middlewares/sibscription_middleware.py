@@ -17,9 +17,6 @@ class SibscriptionMiddleware(BaseMiddleware):
             return await handler(event, data)
 
         user_id = message.from_user.id
-
-        if user_id is None:
-            return await handler(event, data)
         
         chat_obj = await message.bot.get_chat(message.chat.id)
         linked_chat_id = chat_obj.linked_chat_id

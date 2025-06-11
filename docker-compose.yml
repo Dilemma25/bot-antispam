@@ -1,8 +1,11 @@
 services:
-  telegramm-antispam-bot:
+  antispam-telegramm-bot:
     build:
       context: ./bot
+      target: prod
     container_name: telegramm_antispam_bot
     restart: unless-stopped
     env_file:
       - .env
+    volumes:
+    - .:/bot

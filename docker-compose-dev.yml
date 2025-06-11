@@ -9,14 +9,3 @@ services:
       - .env
     volumes:
       - .:/bot
-    depends_on:
-      - antispam-redis
-
-  antispam-redis:
-    image: redis:7.2
-    container_name: antispam_redis
-    restart: unless-stopped
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./data:/data
