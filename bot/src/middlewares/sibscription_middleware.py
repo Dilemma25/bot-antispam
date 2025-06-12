@@ -3,7 +3,8 @@ from aiogram.dispatcher.middlewares.base import BaseMiddleware
 from aiogram import Bot
 from aiogram import types
 from aiogram.enums import ChatMemberStatus
-
+from aiogram.enums import ContentType
+import logging
 
 class SibscriptionMiddleware(BaseMiddleware):
     def __init__(self, bot: Bot) -> None:
@@ -23,6 +24,7 @@ class SibscriptionMiddleware(BaseMiddleware):
 
         member = await self.bot.get_chat_member(linked_chat_id, user_id=user_id)
 
+        
         if member.status in (ChatMemberStatus.LEFT, ChatMemberStatus.KICKED):
             await message.delete()
             return
